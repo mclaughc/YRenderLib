@@ -1,0 +1,3 @@
+[submodule "Dependancies/YBaseLib"]
+	path = Dependancies/YBaseLib
+	url = https://bitbucket.org/connormcl/YBaseLib.git

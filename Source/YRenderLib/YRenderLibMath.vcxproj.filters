@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Frustum.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\HashTraits.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Interpolator.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Line.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Matrixf.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Plane.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Quaternion.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Ray.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDMatrixf.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDMatrixf_scalar.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDMatrixi.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDMatrixi_scalar.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectorf.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectorf_scalar.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectorf_sse.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectori.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectori_scalar.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\SIMDVectori_sse.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Sphere.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\StreamOperators.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\StringConverters.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Transform.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Vectorf.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Vectorh.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Vectori.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\VectorShuffles.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Vectoru.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\AABox.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Angle.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\CollisionDetection.h" />
+    <ClInclude Include="..\..\Include\YRenderLib\Math\Common.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Math\HashTraits.cpp" />
+    <ClCompile Include="Math\Interpolator.cpp" />
+    <ClCompile Include="Math\Matrixf.cpp" />
+    <ClCompile Include="Math\Plane.cpp" />
+    <ClCompile Include="Math\Quaternion.cpp" />
+    <ClCompile Include="Math\Ray.cpp" />
+    <ClCompile Include="Math\SIMDMatrixf_scalar.cpp" />
+    <ClCompile Include="Math\SIMDVectorf_scalar.cpp" />
+    <ClCompile Include="Math\SIMDVectorf_sse.cpp" />
+    <ClCompile Include="Math\SIMDVectori_scalar.cpp" />
+    <ClCompile Include="Math\SIMDVectori_sse.cpp" />
+    <ClCompile Include="Math\Sphere.cpp" />
+    <ClCompile Include="Math\StreamOperators.cpp" />
+    <ClCompile Include="Math\StringConverters.cpp" />
+    <ClCompile Include="Math\Transform.cpp" />
+    <ClCompile Include="Math\Vectorf.cpp" />
+    <ClCompile Include="Math\Vectorh.cpp" />
+    <ClCompile Include="Math\Vectori.cpp" />
+    <ClCompile Include="Math\Vectoru.cpp" />
+    <ClCompile Include="Math\AABox.cpp" />
+    <ClCompile Include="Math\Angle.cpp" />
+    <ClCompile Include="Math\CollisionDetection.cpp" />
+    <ClCompile Include="Math\Frustum.cpp" />
+  </ItemGroup>
+</Project>
