@@ -14,6 +14,7 @@ Log_SetChannel(Renderer);
 #include <SDL/SDL_syswm.h>
 
 #define WITH_RENDERER_D3D11
+#define WITH_RENDERER_VULKAN
 
 //----------------------------------------------------- RenderSystem Creation Functions -----------------------------------------------------------------------------------------------
 // renderer creation functions
@@ -29,6 +30,9 @@ typedef bool(*RendererFactoryFunction)(const RendererInitializationParameters *p
 #endif
 #if defined(WITH_RENDERER_OPENGLES2)
     extern bool OpenGLES2RenderBackend_Create(const RendererInitializationParameters *pCreateParameters, SDL_Window *pSDLWindow, GPUDevice **ppDevice, GPUContext **ppImmediateContext, GPUOutputBuffer **ppOutputBuffer);
+#endif
+#if defined(WITH_RENDERER_VULKAN)
+    extern bool VulkanBackend_Create(const RendererInitializationParameters *pCreateParameters, SDL_Window *pSDLWindow, GPUDevice **ppDevice, GPUContext **ppImmediateContext, GPUOutputBuffer **ppOutputBuffer);
 #endif
 struct RENDERER_PLATFORM_FACTORY_FUNCTION
 {
@@ -50,6 +54,9 @@ static const RENDERER_PLATFORM_FACTORY_FUNCTION s_renderSystemDeclarations[] =
 #endif
 #if defined(WITH_RENDERER_OPENGLES2)
     { RENDERER_PLATFORM_OPENGLES2,  OpenGLES2RenderBackend_Create,  true    },
+#endif
+#if defined(WITH_RENDERER_VULKAN)
+    { RENDERER_PLATFORM_VULKAN,     VulkanBackend_Create,           true    },
 #endif
 };
 

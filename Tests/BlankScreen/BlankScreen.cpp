@@ -7,6 +7,7 @@ int main(int argc, char* argv[])
     Log::GetInstance().SetConsoleOutputParams(true);
 
     RendererInitializationParameters params;
+    params.Platform = RENDERER_PLATFORM_VULKAN;
 
     GPUDevice* pDevice;
     GPUContext* pContext;
