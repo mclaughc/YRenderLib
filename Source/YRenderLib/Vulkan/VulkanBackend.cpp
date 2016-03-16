@@ -1,5 +1,6 @@
 #include "YBaseLib/Log.h"
 #include "YBaseLib/NumericLimits.h"
+#include "YBaseLib/PODArray.h"
 #include "YRenderLib/Vulkan/VulkanCommon.h"
 #include "YRenderLib/Vulkan/VulkanDefines.h"
 #include "YRenderLib/Vulkan/VulkanGPUContext.h"
@@ -103,6 +104,63 @@ static bool CreateSurface(VkInstance instance, SDL_Window* pSDLWindow, VkSurface
 #endif
 }
 
+static bool SelectExtensions(VkInstance instance, VkPhysicalDevice physicalDevice, PODArray<const char*>& extensionNameList)
+{
+    uint32 extensionCount;
+    VkResult res = vkEnumerateDeviceExtensionProperties(physicalDevice, nullptr, &extensionCount, nullptr);
+    if (res != VK_SUCCESS)
+    {
+        LOG_VULKAN_ERROR(res, "vkEnumerateDeviceExtensionProperties failed: ");
+        return false;
+    }
+
+    if (extensionCount == 0)
+    {
+        Log_ErrorPrintf("No extensions supported by device.");
+        return false;
+    }
+
+    VkExtensionProperties* availableExtensionsList = (VkExtensionProperties*)alloca(sizeof(VkExtensionProperties) * extensionCount);
+    res = vkEnumerateDeviceExtensionProperties(physicalDevice, nullptr, &extensionCount, availableExtensionsList);
+    if (res != VK_SUCCESS)
+    {
+        LOG_VULKAN_ERROR(res, "vkEnumerateDeviceExtensionProperties failed: ");
+        return false;
+    }
+
+    SmallString extensionsString;
+    for (uint32 i = 0; i < extensionCount; i++)
+        extensionsString.AppendFormattedString("%s%s", (i > 0) ? ", " : "Available extensions: ", availableExtensionsList[i].extensionName);
+    Log_DevPrint(extensionsString.GetCharArray());
+
+    auto checkForExtension = [&extensionNameList, availableExtensionsList, extensionCount](const char* name, bool required) -> bool
+    {
+        for (uint32 i = 0; i < extensionCount; i++)
+        {
+            if (Y_strcmp(availableExtensionsList[i].extensionName, name) == 0)
+            {
+                extensionNameList.Add(availableExtensionsList[i].extensionName);
+                return true;
+            }
+        }
+
+        if (required)
+        {
+            Log_ErrorPrintf("Missing required extension %s.", name);
+            return false;
+        }
+
+        return true;
+    };
+
+    if (!checkForExtension(VK_KHR_SWAPCHAIN_EXTENSION_NAME, true))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 static bool CreateDevice(VkInstance instance, VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, VkDevice* pDevice)
 {
     // TODO: Cache queue types/indices
@@ -162,10 +220,14 @@ static bool CreateDevice(VkInstance instance, VkPhysicalDevice physicalDevice, V
     createInfo.queueCreateInfoCount = 1;
     createInfo.pQueueCreateInfos = &queueCreateInfo;
 
+    PODArray<const char*> enabledExtensionNames;
+    if (!SelectExtensions(instance, physicalDevice, enabledExtensionNames))
+        return false;
+
     createInfo.enabledLayerCount = 0;
     createInfo.ppEnabledLayerNames = nullptr;
-    createInfo.enabledExtensionCount = 0;
-    createInfo.ppEnabledExtensionNames = nullptr;
+    createInfo.enabledExtensionCount = enabledExtensionNames.GetSize();
+    createInfo.ppEnabledExtensionNames = enabledExtensionNames.GetBasePointer();
     createInfo.pEnabledFeatures = nullptr;
 
     VkResult res = vkCreateDevice(physicalDevice, &createInfo, nullptr, pDevice);
