@@ -21,12 +21,15 @@
   <ItemGroup>
     <ClCompile Include="Vulkan\VulkanBackend.cpp" />
     <ClCompile Include="Vulkan\VulkanDefines.cpp" />
+    <ClCompile Include="Vulkan\VulkanGPUContext.cpp" />
+    <ClCompile Include="Vulkan\VulkanGPUDevice.cpp" />
     <ClCompile Include="Vulkan\VulkanImports.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vulkan\VulkanCommon.h" />
     <ClInclude Include="Vulkan\VulkanDefines.h" />
     <ClInclude Include="Vulkan\VulkanGPUContext.h" />
+    <ClInclude Include="Vulkan\VulkanGPUDevice.h" />
     <ClInclude Include="Vulkan\VulkanImports.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
